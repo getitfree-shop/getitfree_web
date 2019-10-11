@@ -1,15 +1,22 @@
 const path = require("path")
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const fs = require('fs-extra')
 const webpack = require("webpack")
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const mode = process.env.mode
 const isProduction = mode === 'production'
 const resolve = pathname => path.resolve(__dirname, pathname)
 
+if (isProduction) {
+    fs.copySync(resolve('static'), resolve('dist'))
+}
+
 module.exports = {
     mode,
     devtool: !isProduction && 'source-map',
-    entry: resolve("src/index.tsx"),
+    entry: {
+        index: resolve("src/index.tsx")
+    },
     resolve: {
         alias: {
             "@": resolve('src')
@@ -68,7 +75,15 @@ module.exports = {
             template: resolve('index.html'),
             filename: 'index.html',
             chunks: ['index'],
-            name: 'index'
+            name: 'index',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true,
+                removeRedundantAttributes: true,
+                removeScriptTypeAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                useShortDoctype: true
+            } 
         }),
         new webpack.DefinePlugin({
             isProduction: JSON.stringify(isProduction)
