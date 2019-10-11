@@ -1,0 +1,43 @@
+{
+    "baseUrl": "types",
+    "typeRoots": ["types"],
+    "compilerOptions": {
+        "allowUmdGlobalAccess": true,
+        "jsx": "react",
+        "target": "es5",
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
+        "importHelpers": true,
+        "strictNullChecks": false,
+        "suppressImplicitAnyIndexErrors": true,
+        "noUnusedLocals": false,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "baseUrl": "src",
+        "paths": {
+            "@/*": ["./*"]
+        },
+        "module": "commonjs",
+        "sourceMap": true,
+        "watch": true,
+        "allowJs": true,
+        "outDir": "generated",
+        "types": ["react", "react-dom"],
+        "lib": ["es2018", "dom"]
+    },
+    "indent": [
+        true,
+        "spaces",
+        4
+    ],
+    "include": [
+        "./src/**/*.ts",
+        "./src/**/*.tsx",
+        "./index.d.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
